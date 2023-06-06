@@ -149,7 +149,7 @@ public class WebUtil extends FileUtil{
 			//System.out.println(size);
 			
 			String value = lists.getText();
-			System.out.println(value);
+			//System.out.println(value);
 			
 			
 			}  

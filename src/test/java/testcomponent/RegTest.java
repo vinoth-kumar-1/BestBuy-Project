@@ -47,7 +47,6 @@ public class RegTest extends Base {
 
 		HomePages homepagesobject = new HomePages();
 
-		//homepagesobject.topMenuValidation();
 		homepagesobject.topMenus();	
 	}
 	
@@ -81,12 +80,28 @@ public class RegTest extends Base {
 		homepagesobject.navigateToTheCheckoutPageWithDummyPayment();
 	}
 	
+	@Test
+	public void test11() throws Throwable {
+		HomePages homepagesobject = new HomePages();
+		homepagesobject.navigateToTheCheckoutPageWithDummyPayment();
+	}
 	
+	@Test
+	public void test12() throws Throwable {
+
+		HomePages homepagesobject = new HomePages();
+
+		homepagesobject.topMenuValidation1();
+	}
 	
-	
-	
-	
-	
+//	@Test
+//	public void test13() throws Throwable {
+//
+//		HomePages homepagesobject = new HomePages();
+//
+//		homepagesobject.topMenuValidation2();
+//	}
+//	
 	
 	
 	

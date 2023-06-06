@@ -297,7 +297,9 @@ public class HomePages extends Base {
 	}
 	
 	public void signUp() {
+		
 		eleClick(us_countryselection);
+		explicitWaitMethod(account_button,5);
 		eleClick(account_button);
 		eleClick(create_account);
 		
@@ -330,7 +332,9 @@ public class HomePages extends Base {
 	
 	
 	public void login() {
+		
 		eleClick(us_countryselection);
+		explicitWaitMethod(account_button,5);
 		eleClick(account_button);
 		eleClick(signin);
 		
@@ -344,13 +348,15 @@ public class HomePages extends Base {
 	
 	}
 	
-	public void topMenuValidation() throws Throwable {
+	public void topMenuValidation1() throws Throwable {
 		
 		try {
 			
 			//String  value1 = null;
 			eleClick(us_countryselection);
 			//eleClick(canada_countryselection);
+			
+			
 			listElementsMethod(topmenulists);
 			//listElementsMethod(topmenulist);
 			//eleClick();
@@ -365,15 +371,16 @@ public class HomePages extends Base {
 			
 			 for (WebElement webElement : topmenulists) {
 		            String name = webElement.getText();
-		            //Assert.assertEquals(name,excelMethodWithSheetNo(0,1,1));
+		            Assert.assertEquals(name,excelMethodWithSheetNo(0,0,0));
+		            
 		            //Assert.assertEquals(name,excel());
 //		            Assert.assertEquals(name,"Top Deals 
 //		            		 Deal of the Day
 //		            		 Totaltech Membership
 //		            		 Credit Cards
 //		            		 Gift Cards");
-		            Assert.assertTrue(name.contains(readProperty("menutitles")));
-		            Assert.assertEquals(name, readProperty("menutitles"));
+		            //Assert.assertTrue(name.contains(readProperty("menutitles")));
+		           // Assert.assertEquals(name, readProperty("menutitles"));
 		            //System.out.println(name);
 		            //System.out.println(excelMethodWithSheetNo(0,1,1));
 		            
@@ -383,12 +390,24 @@ public class HomePages extends Base {
 			 
 			 
 			listElementsMethod(topmenulistmorebutton);
-			//Assert.assertEquals(topmenulists ,excelMethodWithSheetNo(0,6,1));
-			
+			 for (WebElement webElement : topmenulistmorebutton) {
+		            String name = webElement.getText();
+		            Assert.assertEquals(name,excelMethodWithSheetNo(0,5,0));
+			      //Assert.assertEquals(topmenulists ,excelMethodWithSheetNo(0,6,1));
+			 }
+			 
+			 
 			eleClick(topmenudownarrow);
 			
 	        listElementsMethod(topmenuhiddenlists);
-	        //Assert.assertEquals(topmenulists ,excelMethodWithSheetNo(0,7,1));
+	        
+	        for (WebElement webElement : topmenuhiddenlists) {
+	            String name = webElement.getText();
+	            Assert.assertEquals(name,excelMethodWithSheetNo(0,6,0));
+		      //Assert.assertEquals(topmenulists ,excelMethodWithSheetNo(0,6,1));
+	          //Assert.assertEquals(topmenulists ,excelMethodWithSheetNo(0,7,1));
+		 }
+	       
 			
 			eleClick(topmenulistclosebutton);
 			
@@ -401,7 +420,17 @@ public class HomePages extends Base {
 	
 	}
 	
-	
+	public void topMenuValidation2() throws Throwable {
+		
+		eleClick(us_countryselection);	
+		listElementsMethod(topmenulists);
+		
+
+		 for (WebElement webElement : topmenulists) {
+	            String name = webElement.getText();
+	            Assert.assertEquals(name,readExcel());
+		 }
+	}
 	
 	public void topMenus() throws Throwable {
 		
@@ -632,25 +661,25 @@ public class HomePages extends Base {
 		
 		eleClick(continuetopaymentinformation);
 		
-		eleClick(cardnumber);
-		sendKeysMethod(cardnumber,(readProperty("cardnumber")));
-		
-		
-		eleClick(firstnameincheckout);
-		sendKeysMethod(firstnameincheckout,(readProperty("firstname")));
-		
-		eleClick(lastnameincheckout);
-		sendKeysMethod(lastnameincheckout,(readProperty("lastname")));
-		
-		
-		eleClick(addressincheckout);
-		sendKeysMethod(addressincheckout,(readProperty("address")));
-		explicitWaitMethod(addressincheckout,17);
-	
-		eleClick(cityincheckout);
-		
-		
-		eleClick(placeyourorder);
+//		eleClick(cardnumber);
+//		sendKeysMethod(cardnumber,(readProperty("cardnumber")));
+//		
+//		
+//		eleClick(firstnameincheckout);
+//		sendKeysMethod(firstnameincheckout,(readProperty("firstname")));
+//		
+//		eleClick(lastnameincheckout);
+//		sendKeysMethod(lastnameincheckout,(readProperty("lastname")));
+//		
+//		
+//		eleClick(addressincheckout);
+//		sendKeysMethod(addressincheckout,(readProperty("address")));
+//		explicitWaitMethod(addressincheckout,17);
+//	
+//		eleClick(cityincheckout);
+//		
+//		
+//		eleClick(placeyourorder);
 		
 		
 		

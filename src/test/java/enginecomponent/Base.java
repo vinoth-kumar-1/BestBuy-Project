@@ -22,7 +22,7 @@ public class Base  extends WebUtil {
 	@AfterMethod(alwaysRun=true)
 	public void aftertest() {
 		implicitWaitMethod(5);
-		//browserClose();
+		browserClose();
 	}
 
 }

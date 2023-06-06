@@ -2,6 +2,8 @@ package utility;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.Properties;
 
 import org.apache.poi.ss.usermodel.Cell;
@@ -80,63 +82,126 @@ public class FileUtil {
 	}
 	
 	public String excelMethodWithSheetNo(int sheetind, int rowind, int colind) throws Throwable {
-		String data = null;
 		
-		FileInputStream fis = new FileInputStream("C:\\Users\\VINOTH\\eclipse-workspace\\BestBuy\\Book2.xlsx");
-		XSSFWorkbook workbook = new XSSFWorkbook(fis);
-		XSSFSheet sheet = workbook.getSheetAt(sheetind);
-		//XSSFSheet sheet = workbook.getSheetAt(0);
 		
-                    
+		     String data = null;
 		
-		Row row = sheet.getRow(rowind);
-		Cell cell = row.getCell(colind);
-		
-//		Row row = sheet.getRow(1);
-//		Cell cell = row.getCell(1);
-		
-        //System.out.println(cell);
-		//System.out.println(sheet.getRow(0).getCell(0));
-		//String cellval = cell.getStringCellValue();
-		//System.out.println(cellval);
-		
-	    DataFormatter format = new DataFormatter();
-		data = format.formatCellValue(cell);
-		
-		//workbook.close();
-		return data;
-		//return cell;
-		
+		try {
+			
+			FileInputStream fis = new FileInputStream("C:\\Users\\VINOTH\\eclipse-workspace\\BestBuy\\Book2.xlsx");
+			XSSFWorkbook workbook = new XSSFWorkbook(fis);
+			XSSFSheet sheet = workbook.getSheetAt(sheetind);
+			//XSSFSheet sheet = workbook.getSheetAt(0);
+
+			Row row = sheet.getRow(rowind);
+			Cell cell = row.getCell(colind);
+			
+//		    Row row = sheet.getRow(1);
+//		    Cell cell = row.getCell(1);
+			
+			//System.out.println(cell);
+			//System.out.println(sheet.getRow(0).getCell(0));
+			//String cellval = cell.getStringCellValue();
+			//System.out.println(cellval);
+			
+			DataFormatter format = new DataFormatter();
+			data = format.formatCellValue(cell);
+			
+			workbook.close();
+			return data;
+			//return cell;
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		  return data;
 	}
 	
+	
+	
 	public String excel() throws Throwable {
-		//Create an object of File class to open xlsx file
-        File file = new File("C:\\Users\\VINOTH\\eclipse-workspace\\BestBuy\\Book2.xlsx");
-        
-        //Create an object of FileInputStream class to read excel file
-        FileInputStream inputStream = new FileInputStream(file);
-        
-        //Creating workbook instance that refers to .xls file
-        XSSFWorkbook wb = new XSSFWorkbook(inputStream);
-        
-        //Creating a Sheet object using the sheet Name
-        XSSFSheet sheet = wb.getSheet("Sheet1");
-        
-        //Create a row object to retrieve row at index 1
-        XSSFRow row2=sheet.getRow(11);
-        
-        //Create a cell object to retreive cell at index 5
-        XSSFCell cell=row2.getCell(0);
-        
-        //Get the address in a variable
-        String address= cell.getStringCellValue();
-        
-        //Printing the address
-        //System.out.println("Address is :"+ address);
-        System.out.println(address);
+		//Get the address in a variable
+		String address = null;
+		try {
+			//Create an object of File class to open xlsx file
+			File file = new File("C:\\Users\\VINOTH\\eclipse-workspace\\BestBuy\\Book2.xlsx");
+			
+			//Create an object of FileInputStream class to read excel file
+			FileInputStream inputStream = new FileInputStream(file);
+			
+			//Creating workbook instance that refers to .xls file
+			XSSFWorkbook wb = new XSSFWorkbook(inputStream);
+			
+			//Creating a Sheet object using the sheet Name
+			XSSFSheet sheet = wb.getSheet("Sheet1");
+			
+			//Create a row object to retrieve row at index 1
+			XSSFRow row2=sheet.getRow(11);
+			
+			//Create a cell object to retreive cell at index 5
+			XSSFCell cell=row2.getCell(0);
+			
+			address = cell.getStringCellValue();
+			
+			//Printing the address
+			//System.out.println("Address is :"+ address);
+			System.out.println(address);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} 
 		return address;
         
 	}
 	
+public String[][] readExcel() {
 
+	String[][] data = null;
+	
+	try {
+		
+	  //XSSFWorkbook book=new XSSFWorkbook("./data/"+excelfile+".xlsx");  // open work book
+		XSSFWorkbook book=new XSSFWorkbook("C:\\Users\\VINOTH\\eclipse-workspace\\BestBuy\\Book2.xlsx");  // open work book
+		XSSFSheet sheet = book.getSheetAt(1);
+		int rowcount = sheet.getLastRowNum(); //2
+		short columnCount = sheet.getRow(0).getLastCellNum(); //2
+		
+		data = new String[rowcount][columnCount];
+		for (int i = 0; i <= rowcount; i++) {
+			XSSFRow row = sheet.getRow(i);
+			for (int j = 0; j <= columnCount; j++) {
+				XSSFCell cell = row.getCell(j);
+				//System.out.println(cell.getStringCellValue());
+				//data[i-1][j]=cell.getStringCellValue();   // [0][0] - leema [1][1] abc 
+				data[i][j]=cell.getStringCellValue();   // [0][0] - leema [1][1] abc 
+				
+			}
+		}
+		book.close();
+	} catch (IOException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+	return data;
+}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }
