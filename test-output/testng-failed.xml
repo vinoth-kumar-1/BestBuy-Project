@@ -5,8 +5,8 @@
     <classes>
       <class name="testcomponent.RegTest">
         <methods>
-          <include name="test13"/>
           <include name="beforetest"/>
+          <include name="test05"/>
           <include name="aftertest"/>
         </methods>
       </class> <!-- testcomponent.RegTest -->

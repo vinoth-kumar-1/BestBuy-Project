@@ -191,8 +191,14 @@ public class HomePages extends Base {
 	@FindBy(xpath = "//a[text()='Camera Drones']")
 	WebElement cameradronesmenu;
 	
-	@FindBy(css = "[data-button-state='ADD_TO_CART'][data-sku-id='6534909']")
+	@FindBy(linkText = "DJI - Mini 3 Pro Drone and Remote Control with Built-in Screen (DJI RC) - Gray")
+	WebElement droneproduct;
+	
+	@FindBy(xpath = "//button[@data-button-state='ADD_TO_CART']")
 	WebElement addtocartfordrone;
+	
+//	@FindBy(css = "[data-button-state='ADD_TO_CART'][data-sku-id='6534909']")
+//	WebElement addtocartfordrone;
 	
 	@FindBy(xpath = "//button[@data-id='node-87']")
 	WebElement brands;
@@ -453,9 +459,11 @@ public class HomePages extends Base {
     	String title3 = getTitleMethod();
      	//System.out.println(title3);
 		//Assert.assertEquals(title3,"Best Buy Totaltech™️ – Best Buy");
+    	explicitWaitMethod(totaltechmembership,7);
 		Assert.assertEquals("Best Buy Totaltech™ – Best Buy",title3);
 		                   //Best Buy Totaltech™ – Best Buy
-		
+		//Assert.assertEquals("Best Buy Totaltechâ„¢ â€“ Best Buy",title3);
+		                   //Best Buy Totaltechâ„¢ â€“ Best Buy
 		
 		eleClick(creditcards);	
 		String title4 = getTitleMethod();
@@ -588,6 +596,7 @@ public class HomePages extends Base {
 		eleClick(camerascamcordersdronesmenu);
 		eleClick(dronesmenu);
 		eleClick(cameradronesmenu);
+		eleClick(droneproduct);
 		eleClick(addtocartfordrone);
 		
 		explicitWaitMethod(addedtocart,7);
@@ -635,6 +644,7 @@ public class HomePages extends Base {
 		
 		eleClick(checkout);
 		
+		explicitWaitMethod(continueasguest,7);
 		eleClick(continueasguest);
 		
 //		eleClick(switchtoshipping);
