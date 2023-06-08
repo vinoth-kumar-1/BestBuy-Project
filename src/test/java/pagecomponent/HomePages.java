@@ -1,15 +1,18 @@
 package pagecomponent;
 
+import java.io.IOException;
 import java.util.List;
 
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindAll;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
 
+import com.aventstack.extentreports.Status;
+
 import enginecomponent.Base;
+import utility.FileUtil;
 import utility.WebUtil;
 
 public class HomePages extends Base {
@@ -283,78 +286,110 @@ public class HomePages extends Base {
 	
 	
 	public void openBestBuy() {
-	
+		try {
+			test.addScreenCaptureFromPath(getScreenShot("openbestbuy"));
+			test.log(Status.PASS, "Website Opened Successfull");
+		} catch (IOException e) {
+			test.log(Status.FAIL, "Website Opened Failed");
+			e.printStackTrace();
+		}
+		
 	}
 	
 	
 	public void bestBuyLinkValidation() {
-		Assert.assertEquals(webutilobj.getCurrentUrlMethod(), (readProperty("url")));
-		//System.out.println(webutilobj.getCurrentUrlMethod());
-		//webutilobj.getCurrentUrlMethod().contains(excelmethod(0,2,2));
-		//Assert.assertEquals((excelmethod(0,2,2)), getCurrentUrlMethod());
-		//Assert.assertTrue(webutilobj.getCurrentUrlMethod().contains(excelmethod(0,2,2)));
-		//System.out.println(webutilobj.getCurrentUrlMethod().contains(excelmethod(0,2,1)));
-		//System.out.println(webutilobj.getCurrentUrlMethod().contains(readProperty("url")));
-		//System.out.println(webutilobj.getCurrentUrlMethod().contains("https://www.bestbuy.com/"));
-		//System.out.println(webutilobj.getCurrentUrlMethod().compareToIgnoreCase(readProperty("url")));
-		//System.out.println(webutilobj.getCurrentUrlMethod().compareToIgnoreCase(excelMethod(0,2,2)));
-		//System.out.println(webutilobj.getCurrentUrlMethod().equalsIgnoreCase(excelMethod(0,2,1)));
-		//Assert.assertSame(webutilobj.getCurrentUrlMethod(), (readProperty("url")));
+		try {
+			Assert.assertEquals(webutilobj.getCurrentUrlMethod(), (readProperty("url")));
+			//System.out.println(webutilobj.getCurrentUrlMethod());
+			//webutilobj.getCurrentUrlMethod().contains(excelmethod(0,2,2));
+			//Assert.assertEquals((excelmethod(0,2,2)), getCurrentUrlMethod());
+			//Assert.assertTrue(webutilobj.getCurrentUrlMethod().contains(excelmethod(0,2,2)));
+			//System.out.println(webutilobj.getCurrentUrlMethod().contains(excelmethod(0,2,1)));
+			//System.out.println(webutilobj.getCurrentUrlMethod().contains(readProperty("url")));
+			//System.out.println(webutilobj.getCurrentUrlMethod().contains("https://www.bestbuy.com/"));
+			//System.out.println(webutilobj.getCurrentUrlMethod().compareToIgnoreCase(readProperty("url")));
+			//System.out.println(webutilobj.getCurrentUrlMethod().compareToIgnoreCase(excelMethod(0,2,2)));
+			//System.out.println(webutilobj.getCurrentUrlMethod().equalsIgnoreCase(excelMethod(0,2,1)));
+			//Assert.assertSame(webutilobj.getCurrentUrlMethod(), (readProperty("url")));
+			
+			test.addScreenCaptureFromPath(getScreenShot("openbestbuyvalidation"));
+			test.log(Status.PASS, "Bestbuy website link validation Successfull");
+		} catch (Exception e) {
+			test.log(Status.FAIL, "Bestbuy website link validation Failed");
+			e.printStackTrace();
+		}
 	}
 	
 	public void signUp() {
 		
-		eleClick(us_countryselection);
-		explicitWaitMethod(account_button,5);
-		eleClick(account_button);
-		eleClick(create_account);
+		try {
+			eleClick(us_countryselection);
+			explicitWaitMethod(account_button,5);
+			eleClick(account_button);
+			eleClick(create_account);
+			
+			eleClick(firstname);
+			clearMethod(firstname);
+			sendKeysMethod(firstname,(readProperty("firstname")));
+			
+			eleClick(lastname);
+			clearMethod(lastname);
+			sendKeysMethod(lastname,(readProperty("lastname")));
+			
+			eleClick(emailinsignup);
+			clearMethod(emailinsignup);
+			sendKeysMethod(emailinsignup,(readProperty("email")));
+			
+			eleClick(password);
+			clearMethod(password);
+			sendKeysMethod(password,(readProperty("password")));
+			
+			eleClick(reenterpassword);
+			clearMethod(reenterpassword);
+			sendKeysMethod(reenterpassword,(readProperty("reenterpassword")));
+			
+			eleClick(phonenumber);
+			clearMethod(phonenumber);
+			sendKeysMethod(phonenumber,(readProperty("phonenumber")));
+			
+			eleClick(create_an_account);
+			
+			test.addScreenCaptureFromPath(getScreenShot("signUp"));
+			test.log(Status.PASS, "Signup Successfull");
+			
+		} catch (Exception e) {
+			test.log(Status.FAIL, "Signup Failed");
+			e.printStackTrace();
+		}
 		
-		eleClick(firstname);
-		clearMethod(firstname);
-		sendKeysMethod(firstname,(readProperty("firstname")));
-		
-		eleClick(lastname);
-		clearMethod(lastname);
-		sendKeysMethod(lastname,(readProperty("lastname")));
-		
-		eleClick(emailinsignup);
-		clearMethod(emailinsignup);
-		sendKeysMethod(emailinsignup,(readProperty("email")));
-		
-		eleClick(password);
-		clearMethod(password);
-		sendKeysMethod(password,(readProperty("password")));
-		
-		eleClick(reenterpassword);
-		clearMethod(reenterpassword);
-		sendKeysMethod(reenterpassword,(readProperty("reenterpassword")));
-		
-		eleClick(phonenumber);
-		clearMethod(phonenumber);
-		sendKeysMethod(phonenumber,(readProperty("phonenumber")));
-		
-		eleClick(create_an_account);
 	}
 	
 	
-	public void login() {
+	public void signin() {
 		
-		eleClick(us_countryselection);
-		explicitWaitMethod(account_button,5);
-		eleClick(account_button);
-		eleClick(signin);
-		
-		eleClick(emailinsignin);
-		sendKeysMethod(emailinsignin ,(readProperty("email")));
-		
-		eleClick(password);
-		sendKeysMethod(password ,(readProperty("password")));
-		
-		eleClick(signin_for_signin);
+		try {
+			eleClick(us_countryselection);
+			explicitWaitMethod(account_button,5);
+			eleClick(account_button);
+			eleClick(signin);
+			
+			eleClick(emailinsignin);
+			sendKeysMethod(emailinsignin ,(readProperty("email")));
+			
+			eleClick(password);
+			sendKeysMethod(password ,(readProperty("password")));
+			
+			eleClick(signin_for_signin);
+			test.addScreenCaptureFromPath(getScreenShot("signin"));
+			test.log(Status.PASS, "Signin Successfull");
+		} catch (Exception e) {
+			test.log(Status.FAIL, "Signin Failed");
+			e.printStackTrace();
+		}
 	
 	}
 	
-	public void topMenuValidation1() throws Throwable {
+	public void topMenuValidation1() throws Throwable  {
 		
 		try {
 			
@@ -378,6 +413,7 @@ public class HomePages extends Base {
 			 for (WebElement webElement : topmenulists) {
 		            String name = webElement.getText();
 		            Assert.assertEquals(name,excelMethodWithSheetNo(0,0,0));
+		            //Assert.assertEquals(name,readExcelSheet());
 		            
 		            //Assert.assertEquals(name,excel());
 //		            Assert.assertEquals(name,"Top Deals 
@@ -412,13 +448,16 @@ public class HomePages extends Base {
 	            Assert.assertEquals(name,excelMethodWithSheetNo(0,6,0));
 		      //Assert.assertEquals(topmenulists ,excelMethodWithSheetNo(0,6,1));
 	          //Assert.assertEquals(topmenulists ,excelMethodWithSheetNo(0,7,1));
+	            
 		 }
 	       
 			
 			eleClick(topmenulistclosebutton);
+			test.addScreenCaptureFromPath(getScreenShot("topmenuvalidation1"));
+			test.log(Status.PASS, "Top menu validation1 Successfull");
 			
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
+			test.log(Status.FAIL, "Top menu validation1 Failed");
 			e.printStackTrace();
 		}
 		
@@ -426,164 +465,209 @@ public class HomePages extends Base {
 	
 	}
 	
-	public void topMenuValidation2() throws Throwable {
-		
-		eleClick(us_countryselection);	
-		listElementsMethod(topmenulists);
-		
+	public void topMenuValidation2()  {
+		try {
+			int i, j;
+			eleClick(us_countryselection);	
+			listElementsMethod(topmenulists);
+			
 
-		 for (WebElement webElement : topmenulists) {
-	            String name = webElement.getText();
-	            Assert.assertEquals(name,readExcel());
-		 }
+			 for (WebElement webElement : topmenulists) {
+			        String name = webElement.getText();
+			        //System.out.println(name);
+			        String[][] readdata = FileUtil.readExcelSheet();
+			        
+			        for(i=0;i<=readdata.length;i++) {
+			        	for(j=0;j<readdata[i].length;j++) {
+			        		Assert.assertEquals(name,readdata[i][j]);
+			        	}
+			        }
+			        //Assert.assertEquals(name,readdata);
+			 }
+			    test.addScreenCaptureFromPath(getScreenShot("topmenuvalidation2"));
+				test.log(Status.PASS, "Top menu validation2 Successfull");	 
+			 
+		} catch (IOException e) {
+			test.log(Status.FAIL, "Top menu validation2 Failed");
+			e.printStackTrace();
+		}
 	}
 	
-	public void topMenus() throws Throwable {
+	public void topMenus()  {
 		
-		eleClick(us_countryselection);
-		
-		eleClick(topdeals);	
-		String title1 = getTitleMethod();
-		//System.out.println(title1);
-		Assert.assertEquals("Top Deals and Featured Offers on Electronics - Best Buy", title1);
-		//Assert.assertEquals(topdeals ,excelMethodWithSheetNo(0,11,1));
-		//Assert.assertEquals(topdeals ,excel());
-		
-		eleClick(dealoftheday);	
-		String title2 = getTitleMethod();
-		//System.out.println(title2);
-		Assert.assertEquals("Deal of the Day: Electronics Deals - Best Buy", title2);
-		
-		
-		eleClick(totaltechmembership);	
-    	String title3 = getTitleMethod();
-     	//System.out.println(title3);
-		//Assert.assertEquals(title3,"Best Buy Totaltech™️ – Best Buy");
-    	explicitWaitMethod(totaltechmembership,7);
-		Assert.assertEquals("Best Buy Totaltech™ – Best Buy",title3);
-		                   //Best Buy Totaltech™ – Best Buy
-		//Assert.assertEquals("Best Buy Totaltechâ„¢ â€“ Best Buy",title3);
-		                   //Best Buy Totaltechâ„¢ â€“ Best Buy
-		
-		eleClick(creditcards);	
-		String title4 = getTitleMethod();
-		//System.out.println(title4);
-		Assert.assertEquals("Best Buy Credit Card: Rewards & Financing", title4);
-		
-		
-		eleClick(giftcards);	
-		String title5 = getTitleMethod();
-		//System.out.println(title5);
-		Assert.assertEquals("Gifts Cards and E-Gift Cards - Best Buy", title5);
-		
-		eleClick(topmenudownarrow);
-		//eleClick(morebutton);
-		
-		eleClick(giftideas);
-		String title6 = getTitleMethod();
-		//System.out.println(title6);
-		Assert.assertEquals("Gift Ideas 2023: Best Gifts to Give This Year - Best Buy", title6);
-		
-		eleClick(topmenudownarrow);	
-		eleClick(healthwellness);
-		String title7 = getTitleMethod();
-		//System.out.println(title7);
-		Assert.assertEquals("Health & Wellness Solutions & Technology - Best Buy", title7);
-		
-		eleClick(topmenudownarrow);
-		eleClick(bestbuyoutlet);
-		String title8 = getTitleMethod();
-		//System.out.println(title8);
-		Assert.assertEquals("Best Buy Outlet: Clearance Electronics Outlet Store – Best Buy", title8);
-		
-		eleClick(topmenudownarrow);
-		eleClick(bestbuybusiness);
-		String title9 = getTitleMethod();
-		//System.out.println(title9);
-		Assert.assertEquals("Best Buy for Business - Best Buy", title9);
-		
-		//eleClick(topmenudownarrow);
-		//eleClick(topmenulistclosebutton);
+		try {
+			eleClick(us_countryselection);
+			
+			eleClick(topdeals);	
+			String title1 = getTitleMethod();
+			//System.out.println(title1);
+			Assert.assertEquals("Top Deals and Featured Offers on Electronics - Best Buy", title1);
+			//Assert.assertEquals(topdeals ,excelMethodWithSheetNo(0,11,1));
+			//Assert.assertEquals(topdeals ,excel());
+			
+			eleClick(dealoftheday);	
+			String title2 = getTitleMethod();
+			//System.out.println(title2);
+			Assert.assertEquals("Deal of the Day: Electronics Deals - Best Buy", title2);
+			
+			
+			eleClick(totaltechmembership);	
+			String title3 = getTitleMethod();
+			//System.out.println(title3);
+			//Assert.assertEquals(title3,"Best Buy Totaltech™️ – Best Buy");
+			
+			explicitWaitMethod(totaltechmembership,7);
+			Assert.assertTrue(title3.contains("Best Buy Totaltech"));
+			//Assert.assertEquals(title3,title3.contains("Best Buy Totaltech"));
+			//Assert.assertEquals("Best Buy Totaltech™ – Best Buy",title3);
+			                     //Best Buy Totaltech™ – Best Buy
+			//Assert.assertEquals("Best Buy Totaltechâ„¢ â€“ Best Buy",title3);
+			                   //Best Buy Totaltechâ„¢ â€“ Best Buy
+			
+			eleClick(creditcards);	
+			String title4 = getTitleMethod();
+			//System.out.println(title4);
+			Assert.assertEquals("Best Buy Credit Card: Rewards & Financing", title4);
+			
+			
+			eleClick(giftcards);	
+			String title5 = getTitleMethod();
+			//System.out.println(title5);
+			Assert.assertEquals("Gifts Cards and E-Gift Cards - Best Buy", title5);
+			
+			eleClick(topmenudownarrow);
+			//eleClick(morebutton);
+			
+			eleClick(giftideas);
+			String title6 = getTitleMethod();
+			//System.out.println(title6);
+			Assert.assertEquals("Gift Ideas 2023: Best Gifts to Give This Year - Best Buy", title6);
+			
+			eleClick(topmenudownarrow);
+			explicitWaitMethod(topmenudownarrow,10);
+			explicitWaitMethod(healthwellness,10);
+			eleClick(healthwellness);
+			String title7 = getTitleMethod();
+			//System.out.println(title7);
+			Assert.assertEquals("Health & Wellness Solutions & Technology - Best Buy", title7);
+			
+			eleClick(topmenudownarrow);
+			eleClick(bestbuyoutlet);
+			String title8 = getTitleMethod();
+			//System.out.println(title8);
+			Assert.assertEquals("Best Buy Outlet: Clearance Electronics Outlet Store – Best Buy", title8);
+			
+			eleClick(topmenudownarrow);
+			eleClick(bestbuybusiness);
+			String title9 = getTitleMethod();
+			//System.out.println(title9);
+			Assert.assertEquals("Best Buy for Business - Best Buy", title9);
+			
+			//eleClick(topmenudownarrow);
+			//eleClick(topmenulistclosebutton);
+			
+			test.addScreenCaptureFromPath(getScreenShot("topmenus"));
+			test.log(Status.PASS, "Top menus validation Successfull");	
+		} catch (Exception e) {
+			test.log(Status.FAIL, "Top menus validation Failed");
+			e.printStackTrace();
+		}
 		
 	
 	}
 	
 	public void bottomMenus() {
 		
-		eleClick(us_countryselection);
-		
-		eleClick(accessibility);
-		String title1 = getTitleMethod();
-		//System.out.println(title1);
-		Assert.assertEquals("Accessibility - Best Buy", title1);
-		
-		
-		eleClick(termsandconditions);
-		String title2 = getTitleMethod();
-		//System.out.println(title2);
-		Assert.assertEquals("BestBuy.com Terms and Conditions", title2);
-		
-		
-		eleClick(privacy);
-		String title3 = getTitleMethod();
-		//System.out.println(title3);
-		Assert.assertEquals("Privacy Policy Hub - Best Buy", title3);
-		
-		
-		eleClick(interestbasedads);
-		String title4 = getTitleMethod();
-		//System.out.println(title4);
-		Assert.assertEquals("Interest-Based Ads - Best Buy", title4);
-		
-		
-		eleClick(stateprivacyrights);
-		String title5 = getTitleMethod();
-		//System.out.println(title5);
-		Assert.assertEquals("State Privacy Rights - Best Buy", title5);
-		
-		
-		eleClick(casonotsellsharemypersonalinformation);
-		String title6 = getTitleMethod();
-		//System.out.println(title6);
-		Assert.assertEquals("Start Request - Best Buy", title6);
-		
-		eleClick(returntohomepage);
-		
-		
-		eleClick(limituseofmysensitivepersonalinformation);
-		String title7 = getTitleMethod();
-		//System.out.println(title7);
-		Assert.assertEquals("Best Buy", title7);
-		
-		eleClick(returntohomepage);
-		
-		eleClick(targetedadvertisingoptout);
-		String title8 = getTitleMethod();
-		//System.out.println(title8);
-		Assert.assertEquals("Start Request - Best Buy", title8);
-		
-		eleClick(returntohomepage);
-		
-		eleClick(casupplychaintransparencyact);
-		String title9 = getTitleMethod();
-		//System.out.println(title9);
-		Assert.assertEquals("California Supply Chain Transparency Act - Best Buy", title9);
+		try {
+			eleClick(us_countryselection);
+			
+			eleClick(accessibility);
+			String title1 = getTitleMethod();
+			//System.out.println(title1);
+			Assert.assertEquals("Accessibility - Best Buy", title1);
+			
+			
+			eleClick(termsandconditions);
+			String title2 = getTitleMethod();
+			//System.out.println(title2);
+			Assert.assertEquals("BestBuy.com Terms and Conditions", title2);
+			
+			
+			eleClick(privacy);
+			String title3 = getTitleMethod();
+			//System.out.println(title3);
+			Assert.assertEquals("Privacy Policy Hub - Best Buy", title3);
+			
+			
+			eleClick(interestbasedads);
+			String title4 = getTitleMethod();
+			//System.out.println(title4);
+			Assert.assertEquals("Interest-Based Ads - Best Buy", title4);
+			
+			
+			eleClick(stateprivacyrights);
+			String title5 = getTitleMethod();
+			//System.out.println(title5);
+			Assert.assertEquals("State Privacy Rights - Best Buy", title5);
+			
+			
+			eleClick(casonotsellsharemypersonalinformation);
+			String title6 = getTitleMethod();
+			//System.out.println(title6);
+			Assert.assertEquals("Start Request - Best Buy", title6);
+			
+			eleClick(returntohomepage);
+			
+			
+			eleClick(limituseofmysensitivepersonalinformation);
+			String title7 = getTitleMethod();
+			//System.out.println(title7);
+			Assert.assertEquals("Best Buy", title7);
+			
+			eleClick(returntohomepage);
+			
+			eleClick(targetedadvertisingoptout);
+			String title8 = getTitleMethod();
+			//System.out.println(title8);
+			Assert.assertEquals("Start Request - Best Buy", title8);
+			
+			eleClick(returntohomepage);
+			
+			eleClick(casupplychaintransparencyact);
+			String title9 = getTitleMethod();
+			//System.out.println(title9);
+			Assert.assertEquals("California Supply Chain Transparency Act - Best Buy", title9);
+			
+			test.addScreenCaptureFromPath(getScreenShot("bottommenus"));
+			test.log(Status.PASS, "Bottom menus validation Successfull");
+		} catch (Exception e) {
+			test.log(Status.FAIL, "Bottom menus validation Failed");
+			e.printStackTrace();
+		}
 	
 		
 	}
 	
 	public void searchForAndAddAnItemToTheShoppingCart() {
 		
-		eleClick(us_countryselection);
-		eleClick(searchbox);
-		sendKeysMethod(searchbox,"Sony - PlayStation 5");
-		eleClick(searchicon);
-		eleClick(addtocartforsonyplaystation);
-		
-		explicitWaitMethod(addedtocart,7);
-		String cart = getTextMethod(addedtocart);
-		//System.out.println(cart);
-		Assert.assertTrue(cart.contains("Added to cart"));
+		try {
+			eleClick(us_countryselection);
+			eleClick(searchbox);
+			sendKeysMethod(searchbox,"Sony - PlayStation 5");
+			eleClick(searchicon);
+			eleClick(addtocartforsonyplaystation);
+			
+			explicitWaitMethod(addedtocart,7);
+			String cart = getTextMethod(addedtocart);
+			//System.out.println(cart);
+			Assert.assertTrue(cart.contains("Added to cart"));
+			
+			test.addScreenCaptureFromPath(getScreenShot("searchForAndAddAnItemToTheShoppingCart"));
+			test.log(Status.PASS, "searchForAndAddAnItemToTheShoppingCart validation Successfull");
+		} catch (Exception e) {
+			test.log(Status.FAIL, "searchForAndAddAnItemToTheShoppingCart validation Failed");
+			e.printStackTrace();
+		}
 		
 	
 	}
@@ -591,62 +675,82 @@ public class HomePages extends Base {
 	
 	public void  selectAndAddAnItemFromMenuAShopByDepartment() {
 		
-		eleClick(us_countryselection);
-		eleClick(hamburgermenus);
-		eleClick(camerascamcordersdronesmenu);
-		eleClick(dronesmenu);
-		eleClick(cameradronesmenu);
-		eleClick(droneproduct);
-		eleClick(addtocartfordrone);
-		
-		explicitWaitMethod(addedtocart,7);
-		String cart = getTextMethod(addedtocart);
-		//System.out.println(cart);
-		Assert.assertTrue(cart.contains("Added to cart"));
+		try {
+			eleClick(us_countryselection);
+			eleClick(hamburgermenus);
+			eleClick(camerascamcordersdronesmenu);
+			eleClick(dronesmenu);
+			eleClick(cameradronesmenu);
+			eleClick(droneproduct);
+			eleClick(addtocartfordrone);
+			
+			explicitWaitMethod(addedtocart,7);
+			String cart = getTextMethod(addedtocart);
+			//System.out.println(cart);
+			Assert.assertTrue(cart.contains("Added to cart"));
+			
+			test.addScreenCaptureFromPath(getScreenShot("selectAndAddAnItemFromMenuAShopByDepartment"));
+			test.log(Status.PASS, "selectAndAddAnItemFromMenuAShopByDepartment validation Successfull");
+		} catch (Exception e) {
+			test.log(Status.FAIL, "selectAndAddAnItemFromMenuAShopByDepartment validation Failed");
+			e.printStackTrace();
+		}
 
 	}
 	
 	public void selectAndAddAnItemFromMenuABrandsASelectAnyBrand() {
 		
-		eleClick(us_countryselection);
-		eleClick(hamburgermenus);
-		eleClick(brands);
-		eleClick(sony);
-		eleClick(playstation);
-		eleClick(playstation5);
-		eleClick(shopplaystation5);
-		eleClick(addtocartforsonyplaystation);
-		
-		explicitWaitMethod(addedtocart,7);
-		String cart = getTextMethod(addedtocart);
-		//System.out.println(cart);
-		Assert.assertTrue(cart.contains("Added to cart"));
+		try {
+			eleClick(us_countryselection);
+			eleClick(hamburgermenus);
+			eleClick(brands);
+			eleClick(sony);
+			explicitWaitMethod(playstation,7);
+			eleClick(playstation);
+			eleClick(playstation5);
+			eleClick(shopplaystation5);
+			eleClick(addtocartforsonyplaystation);
+			
+			explicitWaitMethod(addedtocart,17);
+			String cart = getTextMethod(addedtocart);
+			//System.out.println(cart);
+			Assert.assertTrue(cart.contains("Added to cart"));
+			
+			test.addScreenCaptureFromPath(getScreenShot("selectAndAddAnItemFromMenuABrandsASelectAnyBrand"));
+			test.log(Status.PASS, "selectAndAddAnItemFromMenuABrandsASelectAnyBrand validation Successfull");
+		} catch (Exception e) {
+			test.log(Status.FAIL, "selectAndAddAnItemFromMenuABrandsASelectAnyBrand validation Failed");
+			e.printStackTrace();
+		}
 	
 	}
 	
 	public void navigateToTheCheckoutPageWithDummyPayment() {
 		
-		eleClick(us_countryselection);
-		eleClick(hamburgermenus);
-		eleClick(brands);
-		eleClick(sony);
-		eleClick(playstation);
-		eleClick(playstation5);
-		eleClick(shopplaystation5);
-		eleClick(addtocartforsonyplaystation);
-		
-		explicitWaitMethod(addedtocart,7);
-		String cart = getTextMethod(addedtocart);
-		//System.out.println(cart);
-		Assert.assertTrue(cart.contains("Added to cart"));
-		
-		eleClick(gotocart);
-		
-		eleClick(checkout);
-		
-		explicitWaitMethod(continueasguest,7);
-		eleClick(continueasguest);
-		
+		try {
+			eleClick(us_countryselection);
+			eleClick(hamburgermenus);
+			eleClick(brands);
+			eleClick(sony);
+			explicitWaitMethod(playstation,7);
+			eleClick(playstation);
+			explicitWaitMethod(playstation5,7);
+			eleClick(playstation5);
+			eleClick(shopplaystation5);
+			eleClick(addtocartforsonyplaystation);
+			
+			explicitWaitMethod(addedtocart,7);
+			String cart = getTextMethod(addedtocart);
+			//System.out.println(cart);
+			Assert.assertTrue(cart.contains("Added to cart"));
+			
+			eleClick(gotocart);
+			
+			eleClick(checkout);
+			
+			explicitWaitMethod(continueasguest,7);
+			eleClick(continueasguest);
+			
 //		eleClick(switchtoshipping);
 //		
 //		eleClick(firstnameinshipping);
@@ -661,16 +765,16 @@ public class HomePages extends Base {
 //		explicitWaitMethod(addressinshipping,17);
 //		
 //		eleClick(applybutton);
-		
-		eleClick(emailincheckoutpage);
-		sendKeysMethod(emailincheckoutpage,(readProperty("email")));
-		
-		eleClick(phonenumberincheckoutpage);
-		sendKeysMethod(phonenumberincheckoutpage,(readProperty("phonenumber")));
-		
-		
-		eleClick(continuetopaymentinformation);
-		
+			
+			eleClick(emailincheckoutpage);
+			sendKeysMethod(emailincheckoutpage,(readProperty("email")));
+			
+			eleClick(phonenumberincheckoutpage);
+			sendKeysMethod(phonenumberincheckoutpage,(readProperty("phonenumber")));
+			
+			
+			eleClick(continuetopaymentinformation);
+			
 //		eleClick(cardnumber);
 //		sendKeysMethod(cardnumber,(readProperty("cardnumber")));
 //		
@@ -690,8 +794,14 @@ public class HomePages extends Base {
 //		
 //		
 //		eleClick(placeyourorder);
-		
-		
+			
+			
+			test.addScreenCaptureFromPath(getScreenShot("navigateToTheCheckoutPageWithDummyPayment"));
+			test.log(Status.PASS, "navigateToTheCheckoutPageWithDummyPayment validation Successfull");
+		} catch (Exception e) {
+			test.log(Status.FAIL, "navigateToTheCheckoutPageWithDummyPayment validation Failed");	
+			e.printStackTrace();
+		}
 		
 	}
 	

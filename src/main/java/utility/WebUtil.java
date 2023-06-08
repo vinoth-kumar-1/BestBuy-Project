@@ -8,7 +8,6 @@ import java.util.Date;
 import java.util.List;
 
 import org.apache.commons.io.FileUtils;
-import org.openqa.selenium.Dimension;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
@@ -21,6 +20,9 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import com.aventstack.extentreports.ExtentReports;
+import com.aventstack.extentreports.ExtentTest;
+import com.aventstack.extentreports.reporter.ExtentHtmlReporter;
 import io.github.bonigarcia.wdm.WebDriverManager;
 
 public class WebUtil extends FileUtil{
@@ -29,6 +31,23 @@ public class WebUtil extends FileUtil{
 	public static WebDriver driver = null;
 
 	WebElement element = null;
+	
+
+	public static ExtentHtmlReporter htmlreporter;
+	public static ExtentReports reports;
+	public static ExtentTest test;
+	
+
+	public static void startReport() {
+		htmlreporter = new ExtentHtmlReporter(System.getProperty("user.dir") + "/AutomationTestReport.html");
+		reports = new ExtentReports();
+		reports.attachReporter(htmlreporter);
+	}
+
+	public static void stopReport() {
+		reports.flush();
+	}
+  
 	
 
 		public static boolean browserOpen(String name) {
@@ -60,7 +79,7 @@ public class WebUtil extends FileUtil{
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-			driver.manage().window().maximize();
+			
 			return flag;
 			}
 	
@@ -150,9 +169,8 @@ public class WebUtil extends FileUtil{
 			
 			String value = lists.getText();
 			//System.out.println(value);
-			
-			
 			}  
+	
 		}
 
 	 public static String getScreenShot(String screenshotName) throws IOException {

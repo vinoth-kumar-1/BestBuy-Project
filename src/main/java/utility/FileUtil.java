@@ -2,7 +2,6 @@ package utility;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Properties;
 
@@ -108,10 +107,10 @@ public class FileUtil {
 			data = format.formatCellValue(cell);
 			
 			workbook.close();
-			return data;
+			//return data;
 			//return cell;
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
+			
 			e.printStackTrace();
 		}
 
@@ -155,36 +154,55 @@ public class FileUtil {
         
 	}
 	
-public String[][] readExcel() {
-
-	String[][] data = null;
+//public String[][] readExcel() {
+//
+//	//String[][] data = null;
+//	
+//	
+//		
+//	  //XSSFWorkbook book=new XSSFWorkbook("./data/"+excelfile+".xlsx");  // open work book
+//		XSSFWorkbook book=new XSSFWorkbook("C:\\Users\\VINOTH\\eclipse-workspace\\BestBuy\\Book2.xlsx");  // open work book
+//		XSSFSheet sheet = book.getSheetAt(1);
+//		int rowcount = sheet.getLastRowNum(); //2
+//		short columnCount = sheet.getRow(0).getLastCellNum(); //2
+//		
+//		//String[][]  
+//		String[][] data = new String[rowcount][columnCount];
+//		for (int i = 0; i <= rowcount; i++) {
+//			XSSFRow row = sheet.getRow(i);
+//			for (int j = 0; j <= columnCount; j++) {
+//				XSSFCell cell = row.getCell(j);
+//				//System.out.println(cell.getStringCellValue());
+//				//data[i-1][j]=cell.getStringCellValue();   // [0][0] - leema [1][1] abc 
+//				data[i][j]=cell.getStringCellValue();   // [0][0] - leema [1][1] abc 
+//				
+//			}
+//		}
+//		book.close();
+//		return data;
 	
-	try {
+	public static String[][] readExcelSheet() throws IOException {
 		
-	  //XSSFWorkbook book=new XSSFWorkbook("./data/"+excelfile+".xlsx");  // open work book
+		//XSSFWorkbook book=new XSSFWorkbook("./data/"+excelfile+".xlsx");  // open work book
 		XSSFWorkbook book=new XSSFWorkbook("C:\\Users\\VINOTH\\eclipse-workspace\\BestBuy\\Book2.xlsx");  // open work book
 		XSSFSheet sheet = book.getSheetAt(1);
 		int rowcount = sheet.getLastRowNum(); //2
 		short columnCount = sheet.getRow(0).getLastCellNum(); //2
 		
-		data = new String[rowcount][columnCount];
-		for (int i = 0; i <= rowcount; i++) {
+		String [][] data= new String[rowcount][columnCount]; // data[2][2]
+		for (int i = 0; i < rowcount; i++) {
 			XSSFRow row = sheet.getRow(i);
-			for (int j = 0; j <= columnCount; j++) {
+			for (int j = 0; j < columnCount; j++) {
 				XSSFCell cell = row.getCell(j);
 				//System.out.println(cell.getStringCellValue());
-				//data[i-1][j]=cell.getStringCellValue();   // [0][0] - leema [1][1] abc 
 				data[i][j]=cell.getStringCellValue();   // [0][0] - leema [1][1] abc 
-				
+				System.out.println(cell.getStringCellValue());
 			}
 		}
 		book.close();
-	} catch (IOException e) {
-		// TODO Auto-generated catch block
-		e.printStackTrace();
+		return data;
 	}
-	return data;
-}
+
 	
 	
 	
